@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+.landing__title {
+width: 680;
+height: 240;
+
+}
+
+.corner__summary {
+
+}
