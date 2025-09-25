@@ -1,44 +1,63 @@
-import React from "react";
-import { Link } from "react-router-dom"; // or swap with <a> if no BrowserRouter
+// import React from "react";
+// import { Link } from "react-router-dom";
 
-const SideButton = ({ direction, text, link, position }) => {
-  return (
-    <div
-      className={`hidden lg:block fixed ${position} top-1/2 -translate-y-1/2 w-[500px] h-[500px]`}
-    >
-      <div className="relative w-full h-full">
-        {/* Dotted diamond background */}
-        <div className="w-full h-full border border-dotted border-[#A0A4AB] rotate-45 absolute inset-0"></div>
+// const SideButton = ({ side = "left", label, link, debug = false }) => {
+//   const isLeft = side === "left";
 
-        {/* Button */}
-        <Link to={link}>
-          <button
-            className={`group inline-flex items-center gap-4 text-sm absolute top-1/2 ${
-              direction === "left"
-                ? "right-0 -translate-y-1/2 translate-x-1/5 xl:translate-x-1/6"
-                : "left-0 -translate-y-1/2 -translate-x-1/5 xl:-translate-x-1/6"
-            } px-3 py-1`}
-          >
-            {direction === "left" && (
-              <>
-                <div className="w-[30px] h-[30px] border border-black rotate-45 group-hover:scale-110 duration-300"></div>
-                <span className="absolute left-[18px] top-[8px] rotate-180">▶</span>
-              </>
-            )}
+//   return (
+//     <div
+//       className={`
+//         hidden lg:block fixed top-1/2 -translate-y-1/2
+//         w-[500px] h-[500px] transition-opacity duration-500 ease-in-out opacity-100
+//         ${debug
+//           ? isLeft
+//             ? "left-10"
+//             : "right-10"
+//           : isLeft
+//             ? "left-[calc(-53vw)] xl:left-[calc(-50vw)]"
+//             : "right-[calc(-53vw)] xl:right-[calc(-50vw)]"}
+//       `}
+//     >
+//       <div className="relative w-full h-full">
+//         {/* Background diamond */}
+//         <div className="w-full h-full border border-dotted border-[#A0A4AB] rotate-45 absolute inset-0"></div>
 
-            <span>{text}</span>
+//         {/* Button */}
+//         <Link to={link}>
+//           <button
+//             className={`
+//               group inline-flex items-center justify-center gap-4
+//               whitespace-nowrap rounded-md text-sm font-normal text-[#1A1B1C]
+//               cursor-pointer h-9 px-3 py-1
+//               absolute top-1/2 -translate-y-1/2
+//               ${isLeft
+//                 ? debug
+//                   ? "right-0 translate-x-0"
+//                   : "right-0 translate-x-1/5 xl:translate-x-1/6 [@media(width>=1920px)]:translate-x-1/20"
+//                 : debug
+//                   ? "left-0 -translate-x-0"
+//                   : "left-0 -translate-x-1/5 xl:-translate-x-1/6 [@media(width>=1920px)]:-translate-x-1/20"}
+//             `}
+//           >
+//             {/* Diamond + Arrow */}
+//             <div className="w-[30px] h-[30px] border border-black rotate-45 flex items-center justify-center group-hover:scale-110 duration-300">
+//               <svg
+//                 viewBox="0 0 24 24"
+//                 width="12"
+//                 height="12"
+//                 className={`fill-black ${isLeft ? "rotate-180" : ""}`}
+//               >
+//                 <path d="M8 5v14l11-7z" />
+//               </svg>
+//             </div>
 
-            {direction === "right" && (
-              <>
-                <div className="w-[30px] h-[30px] border border-black rotate-45 group-hover:scale-110 duration-300"></div>
-                <span className="absolute left-[107px] top-[9px]">▶</span>
-              </>
-            )}
-          </button>
-        </Link>
-      </div>
-    </div>
-  );
-};
+//             {/* Label */}
+//             <span>{label}</span>
+//           </button>
+//         </Link>
+//       </div>
+//     </div>
+//   );
+// };
 
-export default SideButton;
+// export default SideButton;
