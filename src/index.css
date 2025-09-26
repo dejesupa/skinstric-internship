@@ -1,7 +1,17 @@
 @import "tailwindcss";
-/* 
-.landing__title {
-width: 680;
-height: 240;
 
-} */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 20s linear infinite;
+  }
+  .animate-spin-slower {
+    animation: spin 30s linear infinite;
+  }
+  .animate-spin-slowest {
+    animation: spin 40s linear infinite;
+  }
+}
