@@ -15,3 +15,11 @@
     animation: spin 40s linear infinite;
   }
 }
+
+@keyframes spin-slowest { 100% { transform: rotate(360deg); } }
+@keyframes spin-slower { 100% { transform: rotate(-360deg); } }
+@keyframes spin-slow { 100% { transform: rotate(360deg); } }
+
+.animate-spin-slowest { animation: spin-slowest 30s linear infinite; }
+.animate-spin-slower { animation: spin-slower 20s linear infinite; }
+.animate-spin-slow { animation: spin-slow 15s linear infinite; }
