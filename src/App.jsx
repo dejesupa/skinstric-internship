@@ -4,6 +4,7 @@ import Hero from "./components/Hero/Hero";
 import TestPage from "./components/Hero/TestPage";
 import ThankYou from "./components/Hero/ThankYou";
 import ResultPage from "./components/Hero/ResultsPage";
+import CameraPage from "./components/Hero/CameraPage";
 
 function App() {
   return (
@@ -11,9 +12,10 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Hero />} />
-        <Route path="/testing" element={<TestPage />} />
+        <Route path="/test" element={<TestPage />} />
         <Route path="/thankyou" element={<ThankYou />} />
         <Route path="/result" element={<ResultPage />} />
+        <Route path="/camera" element={<CameraPage />} />
       </Routes>
     </>
   );

@@ -118,12 +118,25 @@ export default function ResultPage() {
             </div>
           </div>
 
-          {/* Back Button */}
-          <div className="absolute bottom-8 left-8 z-20">
-            <Link to="/result" className="flex items-center space-x-2 text-white">
-              <span className="text-sm font-semibold">BACK</span>
-            </Link>
-          </div>
+    {/* Back Button (Bottom Left) */}
+<div className="absolute bottom-8 left-8 z-20">
+  <Link to="/test">
+    <button className="group inline-flex items-center gap-3 text-sm font-semibold text-white">
+      {/* Diamond Box */}
+      <div className="relative flex items-center justify-center w-[40px] h-[40px] border border-white rotate-45">
+        <svg
+          viewBox="0 0 24 24"
+          className="absolute rotate-[-45deg] w-5 h-5 text-white"
+          fill="currentColor"
+        >
+          <path d="M16 5v14L5 12z" />
+        </svg>
+      </div>
+      <span>BACK</span>
+    </button>
+  </Link>
+</div>
+
         </div>
       )}
 
@@ -140,20 +153,20 @@ export default function ResultPage() {
             >
               DENY
             </button>
-            <button
-              onClick={() => {
-                setShowModal(false);
-                setLoading(true);
-                // Fake loading then show camera
-                setTimeout(() => {
-                  setLoading(false);
-                  setCameraActive(true);
-                }, 2000);
-              }}
-              className="px-5 text-[#FCFCFC] font-semibold hover:text-gray-300"
-            >
-              ALLOW
-            </button>
+           <button
+  onClick={() => {
+    setShowModal(false);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      window.location.href = "/camera"; // 👈 go to new camera page
+    }, 1500);
+  }}
+  className="px-5 text-[#FCFCFC] font-semibold hover:text-gray-300"
+>
+  ALLOW
+</button>
+
           </div>
         </div>
       )}
