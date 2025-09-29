@@ -1,14 +1,16 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import camera from "../../assets/camera.svg";
 import gallery from "../../assets/gallery.svg";
-import takePictureIcon from "../../assets/takePictureIcon.png"; // 👈 add your asset
+import takePictureIcon from "../../assets/takePictureIcon.png";
 
 export default function ResultPage() {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [cameraActive, setCameraActive] = useState(false);
+  const [capturedImage, setCapturedImage] = useState(null);
   const videoRef = useRef(null);
+  const navigate = useNavigate();
 
   // Start camera when active
   useEffect(() => {
@@ -24,18 +26,52 @@ export default function ResultPage() {
     }
   }, [cameraActive]);
 
+  // Handle gallery selection
+  const handleGallerySelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCapturedImage(reader.result); // saves Base64
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Capture from video
+  const handleCapture = () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = videoRef.current.videoWidth;
+    canvas.height = videoRef.current.videoHeight;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+    setCapturedImage(canvas.toDataURL("image/png")); // base64
+    setCameraActive(false);
+  };
+
+  // Proceed to demographics
+  const handleProceed = () => {
+    navigate("/demographics", { state: { capturedImage } });
+  };
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center bg-white text-center">
+      {/* Hidden File Input for Gallery */}
+      <input
+        type="file"
+        accept="image/*"
+        className="hidden"
+        id="galleryInput"
+        onChange={handleGallerySelect}
+      />
 
       {/* Camera and Gallery Options */}
-      {!cameraActive && !loading && (
+      {!cameraActive && !loading && !capturedImage && (
         <div className="flex flex-col md:flex-row items-center justify-center gap-20 mt-20">
           {/* Camera Option */}
           <button
             className="relative flex flex-col items-center cursor-pointer z-10"
-            onClick={() => {
-              setShowModal(true);
-            }}
+            onClick={() => setShowModal(true)}
           >
             <img src={camera} alt="Camera Icon" />
           </button>
@@ -43,23 +79,20 @@ export default function ResultPage() {
           {/* Gallery Option */}
           <button
             className="relative flex flex-col items-center cursor-pointer z-10"
-            onClick={() => setShowModal(true)}
+            onClick={() => document.getElementById("galleryInput").click()}
           >
             <img src={gallery} alt="Gallery Icon" />
           </button>
         </div>
       )}
 
-      {/* Camera Loading State */}
+      {/* Loading State */}
       {loading && !cameraActive && (
         <div className="h-[85vh] flex flex-col items-center justify-center relative">
           <div className="relative flex items-center justify-center">
-            {/* Rotating Diamonds */}
             <div className="absolute w-[270px] h-[270px] md:w-[482px] md:h-[482px] border border-dotted border-gray-300 animate-spin-slow"></div>
             <div className="absolute w-[230px] h-[230px] md:w-[444px] md:h-[444px] border border-dotted border-gray-300 animate-spin-slower"></div>
             <div className="absolute w-[190px] h-[190px] md:w-[405px] md:h-[405px] border border-dotted border-gray-300 animate-spin-slowest"></div>
-
-            {/* Camera Icon */}
             <img
               src={camera}
               alt="Camera Icon"
@@ -69,23 +102,11 @@ export default function ResultPage() {
           <p className="mt-6 font-semibold text-sm md:text-base animate-pulse">
             SETTING UP CAMERA ...
           </p>
-
-          {/* Tips */}
-          <div className="mt-8 text-center">
-            <p className="text-xs md:text-sm mb-4 leading-6">
-              TO GET BETTER RESULTS MAKE SURE TO HAVE
-            </p>
-            <div className="flex justify-center space-x-8 text-xs md:text-sm">
-              <p>◇ NEUTRAL EXPRESSION</p>
-              <p>◇ FRONTAL POSE</p>
-              <p>◇ ADEQUATE LIGHTING</p>
-            </div>
-          </div>
         </div>
       )}
 
-      {/* Camera Active State */}
-      {cameraActive && (
+      {/* Camera Active */}
+      {cameraActive && !capturedImage && (
         <div className="h-[90vh] w-screen relative bg-gray-900">
           <video
             ref={videoRef}
@@ -93,7 +114,6 @@ export default function ResultPage() {
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           />
-          {/* Take Picture button */}
           <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20 flex items-center space-x-3">
             <div className="font-semibold text-sm tracking-tight text-white hidden sm:block">
               TAKE PICTURE
@@ -102,41 +122,42 @@ export default function ResultPage() {
               src={takePictureIcon}
               alt="Take Picture"
               className="w-16 h-16 cursor-pointer transform hover:scale-105 transition"
-              onClick={() => alert("Picture taken!")} // Replace with real capture
+              onClick={handleCapture}
             />
           </div>
+        </div>
+      )}
 
-          {/* Tips overlay */}
-          <div className="absolute bottom-20 sm:bottom-40 left-0 right-0 text-center z-20">
-            <p className="text-sm mb-2 font-normal text-white">
-              TO GET BETTER RESULTS MAKE SURE TO HAVE
-            </p>
-            <div className="flex justify-center space-x-8 text-xs text-white">
-              <p>◇ NEUTRAL EXPRESSION</p>
-              <p>◇ FRONTAL POSE</p>
-              <p>◇ ADEQUATE LIGHTING</p>
-            </div>
+      {/* Captured Image Preview */}
+      {capturedImage && (
+        <div className="relative w-full h-screen bg-black flex items-center justify-center">
+          {/* Fullscreen Captured Image */}
+          <img
+            src={capturedImage}
+            alt="Preview"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+
+          {/* Overlay text */}
+          <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white font-semibold text-lg z-20">
+            GREAT SHOT!
+          </p>
+
+          {/* Buttons */}
+          <div className="absolute bottom-20 flex gap-6 z-20">
+            <button
+              className="px-6 py-2 bg-white text-black rounded shadow hover:bg-gray-200"
+              onClick={() => setCapturedImage(null)}
+            >
+              Retake
+            </button>
+            <button
+              className="px-6 py-2 bg-black text-white rounded shadow hover:bg-gray-700"
+              onClick={handleProceed}
+            >
+              Use This Photo
+            </button>
           </div>
-
-    {/* Back Button (Bottom Left) */}
-<div className="absolute bottom-8 left-8 z-20">
-  <Link to="/test">
-    <button className="group inline-flex items-center gap-3 text-sm font-semibold text-white">
-      {/* Diamond Box */}
-      <div className="relative flex items-center justify-center w-[40px] h-[40px] border border-white rotate-45">
-        <svg
-          viewBox="0 0 24 24"
-          className="absolute rotate-[-45deg] w-5 h-5 text-white"
-          fill="currentColor"
-        >
-          <path d="M16 5v14L5 12z" />
-        </svg>
-      </div>
-      <span>BACK</span>
-    </button>
-  </Link>
-</div>
-
         </div>
       )}
 
@@ -153,20 +174,19 @@ export default function ResultPage() {
             >
               DENY
             </button>
-           <button
-  onClick={() => {
-    setShowModal(false);
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      window.location.href = "/camera"; // 👈 go to new camera page
-    }, 1500);
-  }}
-  className="px-5 text-[#FCFCFC] font-semibold hover:text-gray-300"
->
-  ALLOW
-</button>
-
+            <button
+              onClick={() => {
+                setShowModal(false);
+                setLoading(true);
+                setTimeout(() => {
+                  setLoading(false);
+                  setCameraActive(true);
+                }, 1500);
+              }}
+              className="px-5 text-[#FCFCFC] font-semibold hover:text-gray-300"
+            >
+              ALLOW
+            </button>
           </div>
         </div>
       )}

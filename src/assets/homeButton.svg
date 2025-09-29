@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="black" stroke-width="0.75">
+  <!-- Thin diamond outline -->
+  <rect x="4" y="4" width="16" height="16" transform="rotate(45 12 12)"></rect>
+  
+  <!-- Smaller right arrow -->
+  <polygon points="11,9 15,12 11,15" fill="black"></polygon>
+</svg>
