@@ -15,11 +15,20 @@ export default function RightSection({ hoverSide, setHoverSide }) {
       <Link to="/testing">
         <button className="group inline-flex items-center gap-3 text-sm font-semibold text-[#1A1B1C]">
           <span className="mr-6">TAKE TEST</span>
-          <div className="relative flex items-center justify-center w-[40px] h-[40px] border border-black rotate-45">
-            <svg viewBox="0 0 24 24" className="absolute rotate-[-45deg] w-5 h-5 text-black" fill="currentColor">
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </div>
+          <div
+  className="relative flex items-center justify-center 
+             w-[40px] h-[40px] border border-black rotate-45 
+             transition-transform duration-300 ease-in-out 
+             hover:scale-110"
+>
+  <svg
+    viewBox="0 0 24 24"
+    className="absolute rotate-[-45deg] w-5 h-5 text-black"
+    fill="currentColor"
+  >
+    <path d="M8 5v14l11-7z" />
+  </svg>
+</div>
         </button>
       </Link>
     </div>

@@ -9,8 +9,6 @@ export default function CameraPage() {
   const [error, setError] = useState(null);
   const [capturedImage, setCapturedImage] = useState(null);
 
-  
-
   // Start camera
   const startCamera = () => {
     navigator.mediaDevices
@@ -24,7 +22,9 @@ export default function CameraPage() {
       })
       .catch((err) => {
         console.error("Camera access denied:", err);
-        setError("Camera access was denied. Please allow it in your browser settings.");
+        setError(
+          "Camera access was denied. Please allow it in your browser settings."
+        );
       });
   };
 
@@ -38,7 +38,7 @@ export default function CameraPage() {
 
   useEffect(() => {
     startCamera();
-    return () => stopCamera(); // cleanup on unmount
+    return () => stopCamera(); 
   }, []);
 
   const handleCapture = () => {
@@ -53,41 +53,39 @@ export default function CameraPage() {
 
     const imageData = canvas.toDataURL("image/png");
     setCapturedImage(imageData);
-
   };
 
   const handleRetake = () => {
     setCapturedImage(null);
 
     if (!streamRef.current) {
-    startCamera();
-  }
-   
+      startCamera();
+    }
   };
 
   const handleUsePhoto = () => {
     alert("Photo selected! (Replace with upload or next step)");
-     stopCamera();
+    stopCamera();
   };
 
   return (
     <div className="h-[90vh] w-screen relative bg-gray-900 flex flex-col justify-center items-center">
       {/* Video Feed */}
-<video
-  ref={videoRef}
-  autoPlay
-  playsInline
-  className="absolute inset-0 w-full h-full object-cover z-[-1]"
-/>
+      <video
+        ref={videoRef}
+        autoPlay
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-[-1]"
+      />
 
-{/* Captured Image overlay (only shown when captured) */}
-<img
-  src={capturedImage || ""}
-  alt="Captured"
-  className={`absolute inset-0 w-full h-full object-cover z-10 transition-opacity duration-300 ${
-    capturedImage ? "opacity-100" : "opacity-0 pointer-events-none"
-  }`}
-/>
+      {/* Captured Image overlay (only shown when captured) */}
+      <img
+        src={capturedImage || ""}
+        alt="Captured"
+        className={`absolute inset-0 w-full h-full object-cover z-10 transition-opacity duration-300 ${
+          capturedImage ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      />
 
       {/* Hidden Canvas */}
       <canvas ref={canvasRef} className="hidden" />
@@ -139,19 +137,17 @@ export default function CameraPage() {
         </div>
       )}
 
-      {/* Tips Overlay */}
-     {/* Tips Overlay (bottom center) */}
-<div className="absolute bottom-30 sm:bottom-40 left-0 right-0 text-center z-20">
-  <p className="text-sm mb-2 font-normal leading-6 text-[#FCFCFC]">
-    TO GET BETTER RESULTS MAKE SURE TO HAVE
-  </p>
-  <div className="flex justify-center space-x-8 text-xs leading-6 text-[#FCFCFC]">
-    <p>◇ NEUTRAL EXPRESSION</p>
-    <p>◇ FRONTAL POSE</p>
-    <p>◇ ADEQUATE LIGHTING</p>
-  </div>
-</div>
-
+      {/* Tips Overlay (bottom center) */}
+      <div className="absolute bottom-24 sm:bottom-32 left-0 right-0 text-center z-40 pointer-events-none">
+        <p className="text-sm mb-2 font-normal leading-6 text-[#FCFCFC]">
+          TO GET BETTER RESULTS MAKE SURE TO HAVE
+        </p>
+        <div className="flex justify-center space-x-8 text-xs leading-6 text-[#FCFCFC]">
+          <p>◇ NEUTRAL EXPRESSION</p>
+          <p>◇ FRONTAL POSE</p>
+          <p>◇ ADEQUATE LIGHTING</p>
+        </div>
+      </div>
 
       {/* Back Button */}
       <div className="absolute bottom-8 left-8 z-20">

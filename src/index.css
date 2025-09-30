@@ -23,3 +23,22 @@
 .animate-spin-slowest { animation: spin-slowest 30s linear infinite; }
 .animate-spin-slower { animation: spin-slower 20s linear infinite; }
 .animate-spin-slow { animation: spin-slow 15s linear infinite; }
+
+@keyframes spin-slow {
+  from { transform: rotate(45deg); }
+  to { transform: rotate(405deg); }
+}
+
+@keyframes spin-slower {
+  from { transform: rotate(45deg); }
+  to { transform: rotate(-315deg); } /* opposite direction */
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+.animate-spin-slower {
+  animation: spin-slower 30s linear infinite;
+}
+

@@ -50,9 +50,10 @@ export default function ThankYou() {
         <span className="ml-4 text-sm font-semibold">BACK</span>
       </Link>
 
-      {/* Background dotted diamonds */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] border border-dotted border-gray-300 rotate-45"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-dotted border-gray-300 rotate-45"></div>
+      {/* Background rotating dotted diamonds */}
+<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] border border-dotted border-gray-300 rotate-45 animate-spin-slow"></div>
+<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-dotted border-gray-300 rotate-45 animate-spin-slower"></div>
+
     </section>
   );
 }

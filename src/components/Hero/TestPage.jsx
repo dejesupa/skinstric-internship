@@ -128,7 +128,7 @@ export default function TestPage() {
       {/* Back Button */}
       <div className="absolute bottom-8 left-8 flex items-center">
         <Link to="/">
-          <button className="group inline-flex items-center gap-3 text-sm font-semibold text-[#1A1B1C]">
+          <button className="group inline-flex items-center gap-6 text-sm font-semibold text-[#1A1B1C]">
             <div className="relative flex items-center justify-center w-[40px] h-[40px] border border-black rotate-45">
               <svg
                 viewBox="0 0 24 24"
