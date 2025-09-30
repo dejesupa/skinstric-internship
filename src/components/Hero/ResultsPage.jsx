@@ -3,12 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import camera from "../../assets/camera.svg";
 import gallery from "../../assets/gallery.svg";
 import takePictureIcon from "../../assets/takePictureIcon.png";
+import cameraIcon from "../../assets/camera-icon.png";
+import rombuses from "../../assets/rombuses.svg";
+
 
 export default function ResultPage() {
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [cameraActive, setCameraActive] = useState(false);
   const [capturedImage, setCapturedImage] = useState(null);
+   const [analyzing, setAnalyzing] = useState(false);
   const videoRef = useRef(null);
   const navigate = useNavigate();
 
@@ -50,12 +54,79 @@ export default function ResultPage() {
   };
 
   // Proceed to demographics
-  const handleProceed = () => {
-    navigate("/demographics", { state: { capturedImage } });
+ const handleProceed = () => {
+    setAnalyzing(true); // show analyzing loader
+    setTimeout(() => {
+      navigate("/demographics", { state: { capturedImage } });
+    }, 3000); // 3s delay before navigating
   };
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center bg-white text-center">
+       {/* 🔄 Analyzing Loading Screen */}
+      {analyzing && (
+  <div className="absolute inset-0 flex flex-col items-center justify-center bg-white z-50">
+    {/* Inner dotted diamond */}
+    <svg
+      className="absolute w-[280px] h-[280px] animate-[spin_30s_linear_infinite]"
+      viewBox="0 0 100 100"
+    >
+      <rect
+        x="10"
+        y="10"
+        width="80"
+        height="80"
+        fill="none"
+        stroke="#D1D5DB"
+        strokeWidth="0.8"
+        strokeLinecap="round"   // ⬅️ makes the stroke into circles
+        strokeDasharray="0.05 7" // ⬅️ dot + spacing
+        strokeDashoffset="0"
+        transform="rotate(45 50 50)"
+      >
+        <animate
+          attributeName="stroke-dashoffset"
+          values="0;6"
+          dur="2s"
+          repeatCount="indefinite"
+        />
+      </rect>
+    </svg>
+
+    {/* Outer dotted diamond */}
+    <svg
+      className="absolute w-[400px] h-[400px] animate-[spin_60s_linear_infinite]"
+      viewBox="0 0 100 100"
+    >
+      <rect
+        x="10"
+        y="10"
+        width="80"
+        height="80"
+        fill="none"
+        stroke="#D1D5DB"
+        strokeWidth="0.8"
+        strokeLinecap="round"
+        strokeDasharray="0.05 7" // slightly more spaced out
+        strokeDashoffset="0"
+        transform="rotate(45 50 50)"
+      >
+        <animate
+          attributeName="stroke-dashoffset"
+          values="0;8"
+          dur="3s"
+          repeatCount="indefinite"
+        />
+      </rect>
+    </svg>
+
+    {/* Text */}
+    <p className="relative z-10 font-semibold text-sm md:text-base text-black">
+      PREPARING YOUR ANALYSIS ...
+    </p>
+  </div>
+)}
+      
       {/* Hidden File Input for Gallery */}
       <input
         type="file"
@@ -70,40 +141,74 @@ export default function ResultPage() {
         <div className="flex flex-col md:flex-row items-center justify-center gap-20 mt-20">
           {/* Camera Option */}
           <button
-            className="relative flex flex-col items-center cursor-pointer z-10"
-            onClick={() => setShowModal(true)}
-          >
-            <img src={camera} alt="Camera Icon" />
-          </button>
+  className="relative inline-flex cursor-pointer z-10"
+  onClick={() => setShowModal(true)}
+>
+  <img
+    src={camera}
+    alt="Camera Icon"
+    className="transition-transform duration-500 hover:scale-105"
+  />
+</button>
 
           {/* Gallery Option */}
-          <button
-            className="relative flex flex-col items-center cursor-pointer z-10"
-            onClick={() => document.getElementById("galleryInput").click()}
-          >
-            <img src={gallery} alt="Gallery Icon" />
-          </button>
+         <button
+  className="relative inline-flex cursor-pointer z-10"
+  onClick={() => document.getElementById("galleryInput").click()}
+>
+  <img
+    src={gallery}
+    alt="Gallery Icon"
+    className="transition-transform duration-500 hover:scale-105"
+  />
+</button>
         </div>
       )}
 
       {/* Loading State */}
       {loading && !cameraActive && (
-        <div className="h-[85vh] flex flex-col items-center justify-center relative">
-          <div className="relative flex items-center justify-center">
-            <div className="absolute w-[270px] h-[270px] md:w-[482px] md:h-[482px] border border-dotted border-gray-300 animate-spin-slow"></div>
-            <div className="absolute w-[230px] h-[230px] md:w-[444px] md:h-[444px] border border-dotted border-gray-300 animate-spin-slower"></div>
-            <div className="absolute w-[190px] h-[190px] md:w-[405px] md:h-[405px] border border-dotted border-gray-300 animate-spin-slowest"></div>
-            <img
-              src={camera}
-              alt="Camera Icon"
-              className="w-[100px] h-[100px] md:w-[136px] md:h-[136px] animate-pulse"
-            />
-          </div>
-          <p className="mt-6 font-semibold text-sm md:text-base animate-pulse">
-            SETTING UP CAMERA ...
-          </p>
-        </div>
-      )}
+  <div className="h-[85vh] flex flex-col items-center justify-center relative text-center">
+    {/* Rotating dotted diamonds */}
+    <div className="relative flex items-center justify-center">
+      <div className="absolute w-[270px] h-[270px] md:w-[482px] md:h-[482px] border border-dotted border-gray-300 animate-spin-slow"></div>
+      <div className="absolute w-[230px] h-[230px] md:w-[444px] md:h-[444px] border border-dotted border-gray-300 animate-spin-slower"></div>
+      <div className="absolute w-[190px] h-[190px] md:w-[405px] md:h-[405px] border border-dotted border-gray-300 animate-spin-slowest"></div>
+
+      {/* Pulsing camera icon */}
+      <img
+        src={cameraIcon}
+        alt="Camera Icon"
+        className="w-[100px] h-[100px] md:w-[136px] md:h-[136px] animate-pulse"
+      />
+    </div>
+
+    {/* Main text */}
+    <p className="mt-6 font-semibold text-sm md:text-base">
+      SETTING UP CAMERA ...
+    </p>
+
+    {/* Helper tips */}
+    <p className="mt-4 text-xs md:text-sm text-gray-700">
+      TO GET BETTER RESULTS MAKE SURE TO HAVE
+    </p>
+
+    <div className="mt-2 flex gap-6 text-xs md:text-sm text-gray-600 items-center">
+      <div className="flex items-center gap-2">
+        <img src={rombuses} alt="diamond" className="w-3 h-3" />
+        <span>NEUTRAL EXPRESSION</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <img src={rombuses} alt="diamond" className="w-3 h-3" />
+        <span>FRONTAL POSE</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <img src={rombuses} alt="diamond" className="w-3 h-3" />
+        <span>ADEQUATE LIGHTING</span>
+      </div>
+    </div>
+  </div>
+)}
+
 
       {/* Camera Active */}
       {cameraActive && !capturedImage && (
@@ -181,7 +286,7 @@ export default function ResultPage() {
                 setTimeout(() => {
                   setLoading(false);
                   setCameraActive(true);
-                }, 1500);
+                }, 3000);
               }}
               className="px-5 text-[#FCFCFC] font-semibold hover:text-gray-300"
             >

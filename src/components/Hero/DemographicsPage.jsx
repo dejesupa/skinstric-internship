@@ -2,6 +2,61 @@ import { Link, useLocation } from "react-router-dom";
 import backDiamond from "../../assets/backbutton.svg";
 import summaryDiamond from "../../assets/getSummary.svg";
 
+function HoverDiamond({ children, clickable, to, state }) {
+  const Wrapper = clickable ? Link : "div";
+
+  return (
+    <div className="relative group flex items-center justify-center">
+      {/* Ripple Diamonds */}
+      <svg
+        className="absolute w-[180px] h-[180px] opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+        viewBox="0 0 100 100"
+      >
+        <rect
+          x="10"
+          y="10"
+          width="80"
+          height="80"
+          fill="none"
+          stroke="#D1D5DB"
+          strokeWidth="1"
+          strokeLinecap="round"
+          strokeDasharray="0.1 6"
+          transform="rotate(45 50 50)"
+        />
+      </svg>
+      <svg
+        className="absolute w-[210px] h-[210px] opacity-0 group-hover:opacity-100 group-hover:scale-125 transition-all duration-1000 delay-150"
+        viewBox="0 0 100 100"
+      >
+        <rect
+          x="10"
+          y="10"
+          width="80"
+          height="80"
+          fill="none"
+          stroke="#D1D5DB"
+          strokeWidth="1"
+          strokeLinecap="round"
+          strokeDasharray="0.1 6"
+          transform="rotate(45 50 50)"
+        />
+      </svg>
+
+      {/* Tile */}
+      <Wrapper
+        to={to}
+        state={state}
+        className={`relative z-10 w-[150px] h-[150px] ${
+          clickable ? "bg-gray-200 hover:bg-gray-300 cursor-pointer" : "bg-gray-100 cursor-not-allowed"
+        } transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase transition-transform duration-300`}
+      >
+        <span className="transform -rotate-45">{children}</span>
+      </Wrapper>
+    </div>
+  );
+}
+
 export default function DemographicsPage() {
   const location = useLocation();
   const { capturedImage } = location.state || {};
@@ -20,41 +75,47 @@ export default function DemographicsPage() {
         </p>
       </div>
 
-{/* Diamond Grid */}
+      {/* Diamond Grid */}
+     {/* Diamond Grid */}
 <div className="flex flex-1 items-center justify-center">
-  <div className="relative z-10 grid grid-cols-3 grid-rows-3 gap-0">
-    {/* Top: Demographics (clickable) */}
+  <div className="relative group">
+  
+
+  {/* Diamond Grid (3x3 with only center axes filled) */}
+  <div className="grid grid-cols-3 grid-rows-3 gap-0 relative z-10">
+    {/* Top */}
     <div className="flex items-center justify-center col-start-2">
       <Link
         to="/summary"
         state={{ capturedImage }}
-        className="w-[150px] h-[150px] bg-gray-200 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 cursor-pointer font-semibold leading-[24px] tracking-tight uppercase hover:scale-[1.05] transition-transform duration-300"
+        className="w-[150px] h-[150px] bg-gray-200 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 font-semibold uppercase cursor-pointer transition-all duration-300"
       >
-        <span className="transform -rotate-45">Demographics</span>
+        <span className="-rotate-45">Demographics</span>
       </Link>
     </div>
 
-    {/* Left: Cosmetic Concerns */}
+    {/* Left */}
     <div className="flex items-center justify-center row-start-2 col-start-1">
-      <div className="w-[150px] h-[150px] bg-gray-100 hover:bg-gray-200 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed">
-        <span className="transform -rotate-45">Cosmetic Concerns</span>
+      <div className="w-[150px] h-[150px] bg-gray-100 hover:bg-gray-200 transform rotate-45 flex items-center justify-center -m-5 font-semibold uppercase cursor-not-allowed">
+        <span className="-rotate-45">Cosmetic Concerns</span>
       </div>
     </div>
 
-    {/* Right: Skin Type Details */}
+    {/* Right */}
     <div className="flex items-center justify-center row-start-2 col-start-3">
-      <div className="w-[150px] h-[150px] bg-gray-100 hover:bg-gray-200 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed">
-        <span className="transform -rotate-45">Skin Type Details</span>
+      <div className="w-[150px] h-[150px] bg-gray-100 hover:bg-gray-200 transform rotate-45 flex items-center justify-center -m-5 font-semibold uppercase cursor-not-allowed">
+        <span className="-rotate-45">Skin Type Details</span>
       </div>
     </div>
 
-    {/* Bottom: Weather */}
+    {/* Bottom */}
     <div className="flex items-center justify-center row-start-3 col-start-2">
-      <div className="w-[150px] h-[150px] bg-gray-100 hover:bg-gray-200 transform rotate-45 flex items-center justify-center -m-5 font-semibold leading-[24px] tracking-tight uppercase cursor-not-allowed">
-        <span className="transform -rotate-45">Weather</span>
+      <div className="w-[150px] h-[150px] bg-gray-100 hover:bg-gray-200 transform rotate-45 flex items-center justify-center -m-5 font-semibold uppercase cursor-not-allowed">
+        <span className="-rotate-45">Weather</span>
       </div>
     </div>
   </div>
+</div>
 </div>
 
       {/* Bottom Nav */}

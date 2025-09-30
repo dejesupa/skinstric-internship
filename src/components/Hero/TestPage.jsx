@@ -143,9 +143,9 @@ export default function TestPage() {
         </Link>
       </div>
 
-      {/* Background dotted diamonds */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] border border-dotted border-gray-300 rotate-45"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-dotted border-gray-300 rotate-45"></div>
+      {/* Background rotating diamonds */}
+<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] border border-dotted border-gray-300 rotate-45 animate-[spin_20s_linear_infinite]"></div>
+<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-dotted border-gray-300 rotate-45 animate-[spin_40s_linear_infinite]"></div>
     </section>
   );
 }
