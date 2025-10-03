@@ -35,7 +35,7 @@ export default function ThankYou() {
 
       {/* Back Button */}
      <div className="absolute bottom-8 left-8 flex items-center">
-  <Link to="/">
+  <Link to="/testing">
     <button className="inline-flex items-center gap-6 text-sm font-semibold text-[#1A1B1C]">
       {/* Diamond */}
       <div

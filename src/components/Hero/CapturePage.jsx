@@ -255,23 +255,38 @@ export default function CameraPage() {
         </div>
       )}
 
-      {/* Back Button */}
-     <div className="absolute bottom-8 left-8 flex items-center">
-  <Link to="/">
-    <button className="inline-flex items-center gap-6 text-sm font-semibold text-white">
-      <div className="relative flex items-center justify-center w-[40px] h-[40px] border border-white rotate-45 transition-transform duration-300 hover:scale-110">
+{/* Back Button */}
+<div className="absolute bottom-8 left-8 flex items-center z-[9999]">
+  <Link to="/testing">
+    <button
+      className={`inline-flex items-center gap-6 text-sm font-semibold 
+        ${cameraActive ? "text-white" : "text-[#1A1B1C]"}`}
+    >
+      {/* Diamond */}
+      <div
+        className={`relative flex items-center justify-center w-[40px] h-[40px] rotate-45
+          transition-transform duration-300 hover:scale-110
+          ${cameraActive ? "border border-white" : "border border-black"}`}
+      >
         <svg
           viewBox="0 0 24 24"
-          className="absolute rotate-[-45deg] w-5 h-5 text-white"
+          className={`absolute rotate-[-45deg] w-5 h-5 
+            ${cameraActive ? "text-white" : "text-black"}`}
           fill="currentColor"
         >
           <path d="M16 5v14L5 12z" />
         </svg>
       </div>
-      <span>BACK</span>
+
+      {/* Label */}
+      <span className="uppercase">BACK</span>
     </button>
   </Link>
 </div>
+
+
+
+
 
     </section>
   );

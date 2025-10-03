@@ -76,7 +76,7 @@ export default function DemographicsPage() {
       <footer className="pt-4 pb-8 bg-white">
         <div className="flex justify-between items-center w-full px-9">
           {/* Back */}
-          <Link to="/" className="flex items-center gap-6 text-sm font-semibold text-[#1A1B1C]">
+          <Link to="/capture" className="flex items-center gap-6 text-sm font-semibold text-[#1A1B1C]">
             <div className="relative flex items-center justify-center w-[40px] h-[40px] border border-black rotate-45 transition-transform duration-300 hover:scale-110">
               <svg
                 viewBox="0 0 24 24"
