@@ -20,3 +20,20 @@ module.exports = {
   },
   plugins: [],
 };
+
+module.exports = {
+  theme: {
+    extend: {
+      keyframes: {
+        'pulse-scale': {
+          '0%, 100%': { transform: 'scale(1) rotate(45deg)' },
+          '50%': { transform: 'scale(1.05) rotate(45deg)' },
+        },
+      },
+      animation: {
+        'pulse-scale': 'pulse-scale 2s ease-in-out infinite',
+      },
+    },
+  },
+  plugins: [],
+};

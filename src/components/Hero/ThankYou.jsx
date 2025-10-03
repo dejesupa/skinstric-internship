@@ -16,39 +16,44 @@ export default function ThankYou() {
         <p className="text-lg text-gray-600">Proceed for the next step</p>
       </div>
 
-      {/* Proceed Button */}
-      <Link
-        to="/result"
-        className="absolute bottom-8 right-8 group flex flex-row items-center gap-3"
-      >
-        <span className="mr-4 text-sm font-semibold">PROCEED</span>
-        <div className="w-12 h-12 border border-black rotate-45 flex items-center justify-center group-hover:scale-105 duration-300">
-          <svg
-            viewBox="0 0 24 24"
-            className="absolute rotate-[-45deg] w-4 h-4 text-black transition-transform duration-300 group-hover:scale-125"
-            fill="currentColor"
-          >
-            <path d="M8 5v14l11-7z" /> {/* right arrow */}
-          </svg>
-        </div>
-      </Link>
+     {/* Proceed Button */}
+<Link
+  to="/result"
+  className="absolute bottom-8 right-8 group flex flex-row items-center gap-6 text-sm font-semibold text-[#1A1B1C]"
+>
+  <span>PROCEED</span>
+  <div className="relative flex items-center justify-center w-[40px] h-[40px] border border-black rotate-45 transition-transform duration-300 group-hover:scale-110">
+    <svg
+      viewBox="0 0 24 24"
+      className="absolute rotate-[-45deg] w-5 h-5 text-black"
+      fill="currentColor"
+    >
+      <path d="M8 5v14l11-7z" /> {/* right arrow */}
+    </svg>
+  </div>
+</Link>
 
       {/* Back Button */}
-      <Link
-        to="/"
-        className="absolute bottom-8 left-8 group flex flex-row items-center gap-3"
+     <div className="absolute bottom-8 left-8 flex items-center">
+  <Link to="/">
+    <button className="inline-flex items-center gap-6 text-sm font-semibold text-[#1A1B1C]">
+      {/* Diamond */}
+      <div
+        className="relative flex items-center justify-center w-[40px] h-[40px] border border-black rotate-45
+                   transition-transform duration-300 hover:scale-110"
       >
-        <div className="w-12 h-12 border border-black rotate-45 flex items-center justify-center group-hover:scale-105 duration-300">
-          <svg
-            viewBox="0 0 24 24"
-            className="absolute rotate-[-45deg] w-4 h-4 text-black transition-transform duration-300 group-hover:scale-125"
-            fill="currentColor"
-          >
-            <path d="M16 5v14L5 12z" /> {/* left arrow */}
-          </svg>
-        </div>
-        <span className="ml-4 text-sm font-semibold">BACK</span>
-      </Link>
+        <svg
+          viewBox="0 0 24 24"
+          className="absolute rotate-[-45deg] w-5 h-5 text-black"
+          fill="currentColor"
+        >
+          <path d="M16 5v14L5 12z" />
+        </svg>
+      </div>
+            <span>BACK</span>
+          </button>
+        </Link>
+      </div>
 
       {/* Background rotating dotted diamonds */}
 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] border border-dotted border-gray-300 rotate-45 animate-spin-slow"></div>

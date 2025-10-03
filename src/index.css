@@ -42,3 +42,7 @@
   animation: spin-slower 30s linear infinite;
 }
 
+.dotted-outline {
+  background-image: radial-gradient(circle, #9ca3af 2px, transparent 2.5px);
+  background-size: 12px 12px; /* spacing between dots */
+}
