@@ -18,7 +18,7 @@ export default function ThankYou() {
 
      {/* Proceed Button */}
 <Link
-  to="/result"
+  to="/capture"
   className="absolute bottom-8 right-8 group flex flex-row items-center gap-6 text-sm font-semibold text-[#1A1B1C]"
 >
   <span>PROCEED</span>

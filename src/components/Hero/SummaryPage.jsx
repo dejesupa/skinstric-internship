@@ -55,13 +55,69 @@ export default function SummaryPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <p className="text-lg font-semibold">Analyzing image...</p>
-      </div>
-    );
-  }
+if (loading) {
+  return (
+    <div className="flex h-screen items-center justify-center relative bg-white">
+      {/* Inner dotted diamond */}
+      <svg
+        className="absolute w-[180px] h-[180px] animate-[spin_30s_linear_infinite]"
+        viewBox="0 0 100 100"
+      >
+        <rect
+          x="10"
+          y="10"
+          width="80"
+          height="80"
+          fill="none"
+          stroke="#D1D5DB"
+          strokeWidth="1"
+          strokeLinecap="round"     // ✅ makes dots circular
+          strokeDasharray="0.1 6"   // ✅ dot + spacing
+          transform="rotate(45 50 50)"
+        >
+          <animate
+            attributeName="stroke-dashoffset"
+            values="0;6"
+            dur="2s"
+            repeatCount="indefinite"
+          />
+        </rect>
+      </svg>
+
+      {/* Outer dotted diamond */}
+      <svg
+        className="absolute w-[260px] h-[260px] animate-[spin_60s_linear_infinite]"
+        viewBox="0 0 100 100"
+      >
+        <rect
+          x="10"
+          y="10"
+          width="80"
+          height="80"
+          fill="none"
+          stroke="#D1D5DB"
+          strokeWidth="1"
+          strokeLinecap="round"     // ✅ rounded stroke
+          strokeDasharray="0.1 7"   // ✅ slightly wider spacing
+          transform="rotate(45 50 50)"
+        >
+          <animate
+            attributeName="stroke-dashoffset"
+            values="0;8"
+            dur="3s"
+            repeatCount="indefinite"
+          />
+        </rect>
+      </svg>
+
+      {/* Text in the center */}
+      <p className="relative z-10 text-lg font-semibold text-black">
+        Analyzing image...
+      </p>
+    </div>
+  );
+}
+
 
   if (!results) return null;
 
@@ -199,12 +255,22 @@ export default function SummaryPage() {
       </main>
 
     {/* Footer */}
-<footer className="sticky bottom-0 bg-white py-2">
+<footer className="sticky bottom-0 bg-white pt-8 pb-2">
   <div className="flex justify-between items-center px-6 relative">
     {/* Left: Back button (link) */}
-    <Link to="/demographics" className="flex items-center gap-2">
-      <img src={backButton} alt="Back" className="w-16 h-16" />
-    </Link>
+    {/* Back */}
+          <Link to="/" className="flex items-center gap-6 text-sm font-semibold text-[#1A1B1C]">
+            <div className="relative flex items-center justify-center w-[40px] h-[40px] border border-black rotate-45 transition-transform duration-300 hover:scale-110">
+              <svg
+                viewBox="0 0 24 24"
+                className="absolute rotate-[-45deg] w-5 h-5 text-black"
+                fill="currentColor"
+              >
+                <path d="M16 5v14L5 12z" />
+              </svg>
+            </div>
+            <span>BACK</span>
+          </Link>
 
     {/* Center: Helper text */}
     <p className="absolute left-1/2 -translate-x-1/2 text-xs text-gray-500">
@@ -212,14 +278,22 @@ export default function SummaryPage() {
     </p>
 
     {/* Right: Home button */}
-   <Link to="/" className="flex items-center gap-2">
-  <span className="text-xs font-semibold">HOME</span>
-  <img
-    src={homeButton}
-    alt="Home"
-    className="w-8 h-8 hover:scale-105 transition-transform"
-  />
-</Link>
+   <Link
+            to="/"
+            state={{ capturedImage }}
+            className="flex items-center gap-6 text-sm font-semibold text-[#1A1B1C]"
+          >
+            <span>HOME</span>
+            <div className="relative flex items-center justify-center w-[40px] h-[40px] border border-black rotate-45 transition-transform duration-300 hover:scale-110">
+              <svg
+                viewBox="0 0 24 24"
+                className="absolute rotate-[-45deg] w-5 h-5 text-black"
+                fill="currentColor"
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </Link>
 
   </div>
 </footer>
