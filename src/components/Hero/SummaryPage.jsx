@@ -91,84 +91,119 @@ export default function SummaryPage() {
 
         {/* Layout Grid */}
         <div className="grid flex-1 md:grid-cols-[1.5fr_8.5fr_3fr] gap-4">
+
           {/* Sidebar Tabs */}
-          <div className="space-y-3">
-            {/* Race */}
-            <div
-              className={`p-3 cursor-pointer ${
-                activeCategory === "race"
-                  ? "bg-black text-white"
-                  : "bg-gray-100 hover:bg-gray-200"
-              }`}
-              onClick={() => {
-                setActiveCategory("race");
-                setSelectedItem([userSelections.race, null] || results.race[0]);
-              }}
-            >
-              <p className="text-base font-semibold">
-                {userSelections.race || results.race[0][0]}
-              </p>
-              <h4 className="text-base font-semibold">RACE</h4>
-            </div>
+<div className="space-y-3">
+  {/* Race */}
+  <div
+    className={`p-3 cursor-pointer ${
+      activeCategory === "race"
+        ? "bg-black text-white"
+        : "bg-gray-100 hover:bg-gray-200"
+    }`}
+    onClick={() => {
+      setActiveCategory("race");
+      setSelectedItem(
+        userSelections.race
+          ? [userSelections.race, results.race.find(([k]) => k === userSelections.race)[1]]
+          : results.race[0]
+      );
+    }}
+  >
+    <p className="text-base font-semibold">
+      {userSelections.race || results.race[0][0]}
+    </p>
+    <h4 className="text-base font-semibold">RACE</h4>
+  </div>
 
-            {/* Age */}
-            <div
-              className={`p-3 cursor-pointer ${
-                activeCategory === "age"
-                  ? "bg-black text-white"
-                  : "bg-gray-100 hover:bg-gray-200"
-              }`}
-              onClick={() => {
-                setActiveCategory("age");
-                setSelectedItem([userSelections.age, null] || results.age[0]);
-              }}
-            >
-              <p className="text-base font-semibold">
-                {userSelections.age || results.age[0][0]}
-              </p>
-              <h4 className="text-base font-semibold">AGE</h4>
-            </div>
+  {/* Age */}
+  <div
+    className={`p-3 cursor-pointer ${
+      activeCategory === "age"
+        ? "bg-black text-white"
+        : "bg-gray-100 hover:bg-gray-200"
+    }`}
+    onClick={() => {
+      setActiveCategory("age");
+      setSelectedItem(
+        userSelections.age
+          ? [userSelections.age, results.age.find(([k]) => k === userSelections.age)[1]]
+          : results.age[0]
+      );
+    }}
+  >
+    <p className="text-base font-semibold">
+      {userSelections.age || results.age[0][0]}
+    </p>
+    <h4 className="text-base font-semibold">AGE</h4>
+  </div>
 
-            {/* Gender */}
-            <div
-              className={`p-3 cursor-pointer ${
-                activeCategory === "gender"
-                  ? "bg-black text-white"
-                  : "bg-gray-100 hover:bg-gray-200"
-              }`}
-              onClick={() => {
-                setActiveCategory("gender");
-                setSelectedItem([userSelections.gender, null] || results.gender[0]);
-              }}
-            >
-              <p className="text-base font-semibold">
-                {userSelections.gender || results.gender[0][0]}
-              </p>
-              <h4 className="text-base font-semibold">SEX</h4>
-            </div>
-          </div>
+  {/* Gender */}
+  <div
+    className={`p-3 cursor-pointer ${
+      activeCategory === "gender"
+        ? "bg-black text-white"
+        : "bg-gray-100 hover:bg-gray-200"
+    }`}
+    onClick={() => {
+      setActiveCategory("gender");
+      setSelectedItem(
+        userSelections.gender
+          ? [userSelections.gender, results.gender.find(([k]) => k === userSelections.gender)[1]]
+          : results.gender[0]
+      );
+    }}
+  >
+    <p className="text-base font-semibold">
+      {userSelections.gender || results.gender[0][0]}
+    </p>
+    <h4 className="text-base font-semibold">SEX</h4>
+  </div>
+</div>
 
-          {/* Center Chart */}
-          <div className="relative bg-gray-100 w-full h-full min-h-[500px] px-6 py-12">
-            <p className="absolute top-6 left-8 text-[32px] font-normal capitalize">
-              {selectedItem ? selectedItem[0] : ""}
-            </p>
+{/* Center Chart */}
+<div className="relative bg-gray-100 w-full h-full min-h-[500px] px-6 py-12">
+  <p className="absolute top-6 left-8 text-[32px] font-normal capitalize">
+    {selectedItem ? selectedItem[0] : ""}
+  </p>
 
-            <div className="absolute right-16 top-1/2 -translate-y-1/2 w-[240px] md:w-[300px] aspect-square flex items-center justify-center">
-              <div className="relative w-full h-full flex items-center justify-center">
-                <div className="absolute inset-0 rounded-full border-[8px] border-gray-300"></div>
-                <div
-                  className="absolute inset-0 rounded-full border-[8px] border-black"
-                  style={{
-                    clipPath: `inset(${100 - (selectedItem?.[1] * 100).toFixed(0)}% 0 0 0)`,
-                  }}
-                ></div>
-                <p className="text-3xl font-normal">
-                  {(selectedItem?.[1] * 100).toFixed(0)}%
-                </p>
-              </div>
-            </div>
-          </div>
+  <div className="absolute right-16 top-1/2 -translate-y-1/2 w-[240px] md:w-[300px] aspect-square flex items-center justify-center">
+    <svg
+      className="w-full h-full"
+      viewBox="0 0 100 100"
+    >
+      {/* Background Circle */}
+      <circle
+        cx="50"
+        cy="50"
+        r="45"
+        stroke="#D1D5DB" /* Tailwind gray-300 */
+        strokeWidth="4"
+        fill="none"
+      />
+
+      {/* Progress Circle */}
+      <circle
+        cx="50"
+        cy="50"
+        r="45"
+        stroke="#000" /* Black */
+        strokeWidth="4"
+        fill="none"
+        strokeDasharray="283"  /* 2 * Math.PI * r (≈ 283 for r=45) */
+        strokeDashoffset={283 - (selectedItem?.[1] || 0) * 283}
+        strokeLinecap="round"
+        transform="rotate(-90 50 50)" /* Start progress at top */
+      />
+    </svg>
+
+    {/* Percentage Text */}
+    <p className="absolute text-3xl font-normal">
+      {(selectedItem?.[1] * 100).toFixed(0)}%
+    </p>
+  </div>
+</div>
+
 
           {/* Confidence List */}
           <div className="bg-gray-100 pt-4 pb-4">
