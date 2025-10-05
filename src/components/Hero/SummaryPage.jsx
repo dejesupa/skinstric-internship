@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useCapture } from "../../context/CaptureContext"; // adjust path if needed
+import { useCapture } from "../../context/CaptureContext"; 
 
 export default function SummaryPage() {
-  const { capturedImage, results, setResults } = useCapture(); // ✅ using context
+  const { capturedImage, results, setResults } = useCapture(); 
   const [loading, setLoading] = useState(false);
 
   // Active category (race | age | gender)
@@ -58,7 +58,7 @@ export default function SummaryPage() {
     }
   };
 
-  // ✅ Loader with rotating dotted diamonds
+  // Loading with rotating dotted diamonds
   if (loading) {
     return (
       <div className="flex h-screen items-center justify-center relative bg-white">

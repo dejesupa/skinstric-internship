@@ -1,7 +1,7 @@
 export default function NavBar() {
   return (
     <nav className="fixed top-0 left-0 w-full h-[64px] z-50 flex items-center justify-between px-6 py-3 bg-white">
-      {/* --- Left Side: Logo + Intro --- */}
+      {/*Logo + Intro*/}
       <div className="flex items-center pt-1 scale-90">
         <a
           href="/"
@@ -42,7 +42,7 @@ export default function NavBar() {
         </svg>
       </div>
 
-      {/* --- Right Side: Button --- */}
+      {/* Right: Button*/}
       <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold h-9 px-4 py-2 text-[10px] text-[#FCFCFC] bg-[#1A1B1C] leading-[16px] shadow hover:bg-black transition-colors duration-200 scale-90">
         ENTER CODE
       </button>

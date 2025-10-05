@@ -4,7 +4,7 @@ export default function LeftSection({ hoverSide, setHoverSide }) {
       className={`
         hidden lg:block fixed top-1/2 left-[8%] -translate-y-1/2
         transition-opacity duration-500 ease-in-out
-        ${hoverSide === "right" ? "opacity-0" : "opacity-100"}  /* ⬅️ inverted */
+        ${hoverSide === "right" ? "opacity-0" : "opacity-100"}  
         z-0
       `}
       onMouseEnter={() => setHoverSide("left")}

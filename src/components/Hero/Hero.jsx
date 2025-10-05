@@ -42,7 +42,7 @@ export default function Hero() {
         what your skin needs.
       </div>
 
-      {/* ---------- MOBILE/TABLET VERSION ---------- */}
+      {/* MOBILE/TABLET VERSION */}
       <div className="absolute inset-0 flex items-center justify-center lg:hidden">
         <div className="relative flex items-center justify-center">
           {/* Outer Diamond */}
@@ -63,7 +63,7 @@ export default function Hero() {
             what your skin needs.
           </p>
 
-        {/* CTA Link to TestPage */}
+        {/* Link to TestPage */}
 <Link
   to="/testing"
   className="mt-6 inline-flex items-center gap-2 text-sm font-semibold transition-transform duration-300 hover:scale-110"
@@ -82,7 +82,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Left + Right hover sections (desktop only) */}
+      {/* Left + Right hover sections (desktop) */}
       <LeftSection hoverSide={hoverSide} setHoverSide={setHoverSide} />
       <RightSection hoverSide={hoverSide} setHoverSide={setHoverSide} />
 

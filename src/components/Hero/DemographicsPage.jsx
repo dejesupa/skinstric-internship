@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { useCapture } from "../../context/CaptureContext"; // adjust path if needed
+import { useCapture } from "../../context/CaptureContext"; 
 
 export default function DemographicsPage() {
-  const { capturedImage } = useCapture(); // ✅ now comes from context
+  const { capturedImage } = useCapture(); 
 
   return (
     <section className="min-h-screen flex flex-col justify-between bg-white text-[#1A1B1C]">
@@ -35,7 +35,7 @@ export default function DemographicsPage() {
 
           {/* Diamond Grid (3x3 with only center axes filled) */}
           <div className="grid grid-cols-3 grid-rows-3 gap-0 relative z-10">
-            {/* Top (Demographics tile is clickable) */}
+            {/* Top (Demographics clickable) */}
             <div className="flex items-center justify-center col-start-2">
               <Link
                 to="/summary"

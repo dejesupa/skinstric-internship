@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCapture } from "../../context/CaptureContext"; // ✅ NEW import
+import { useCapture } from "../../context/CaptureContext"; 
 import camera from "../../assets/camera.svg";
 import gallery from "../../assets/gallery.svg";
 import takePictureIcon from "../../assets/takePictureIcon.png";
 import cameraIcon from "../../assets/camera-icon.png";
 import rombuses from "../../assets/rombuses.svg";
 
-// 🔄 Analyzing Loader
+// Analyzing Loader
 function AnalyzingLoader() {
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50 text-center">
@@ -23,7 +23,7 @@ function AnalyzingLoader() {
   );
 }
 
-// 📷 Camera Setup Loader
+// Camera Setup Loader
 function CameraSetupLoader() {
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50 text-center">
@@ -58,7 +58,7 @@ function CameraSetupLoader() {
   );
 }
 
-// 🖼 Capture Preview
+// Capture Preview
 function CapturePreview({ capturedImage, onRetake, onProceed }) {
   return (
     <div className="fixed inset-0 bg-black flex items-center justify-center z-50">
@@ -88,9 +88,9 @@ function CapturePreview({ capturedImage, onRetake, onProceed }) {
   );
 }
 
-// 🎯 Main Component
+// Main Component
 export default function CameraPage() {
-  const { capturedImage, setCapturedImage } = useCapture(); // ✅ Use global context
+  const { capturedImage, setCapturedImage } = useCapture(); // Use global context
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [cameraActive, setCameraActive] = useState(false);
@@ -99,7 +99,7 @@ export default function CameraPage() {
   const streamRef = useRef(null);
   const navigate = useNavigate();
 
-  // ✅ Start camera
+  // Start camera
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -112,7 +112,7 @@ export default function CameraPage() {
     }
   };
 
-  // ✅ Stop camera
+  // Stop camera
   const stopCamera = () => {
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((track) => track.stop());
@@ -137,7 +137,7 @@ export default function CameraPage() {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setCapturedImage(reader.result); // ✅ store globally
+        setCapturedImage(reader.result); // store globally
       };
       reader.readAsDataURL(file);
     }
@@ -149,19 +149,19 @@ export default function CameraPage() {
     canvas.height = videoRef.current.videoHeight;
     const ctx = canvas.getContext("2d");
     ctx.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
-    setCapturedImage(canvas.toDataURL("image/png")); // ✅ store globally
+    setCapturedImage(canvas.toDataURL("image/png")); // store globally
   };
 
   const handleProceed = () => {
     setAnalyzing(true);
     setTimeout(() => {
-      navigate("/demographics"); // ✅ no need to pass state anymore
+      navigate("/demographics"); 
     }, 3000);
   };
 
   return (
     <section className="relative min-h-screen flex flex-col bg-white text-center">
-      {/* 🔄 Analyzing */}
+      {/* Analyzing */}
       {analyzing && <AnalyzingLoader />}
 
       <input
@@ -250,7 +250,7 @@ export default function CameraPage() {
         <CapturePreview
           capturedImage={capturedImage}
           onRetake={() => {
-            setCapturedImage(null); // ✅ clear global
+            setCapturedImage(null); // clear global
             stopCamera();
             setLoading(true);
             setTimeout(() => {

@@ -12,7 +12,7 @@ export function CaptureProvider({ children }) {
     return saved ? JSON.parse(saved) : null;
   });
 
-  // ✅ Save capturedImage to localStorage when it changes
+  //  Save capturedImage to localStorage when it changes
   useEffect(() => {
     if (capturedImage) {
       localStorage.setItem("capturedImage", capturedImage);
@@ -21,7 +21,7 @@ export function CaptureProvider({ children }) {
     }
   }, [capturedImage]);
 
-  // ✅ Save results to localStorage when they change
+  //  Save results to localStorage when they change
   useEffect(() => {
     if (results) {
       localStorage.setItem("results", JSON.stringify(results));

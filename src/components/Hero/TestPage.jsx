@@ -15,9 +15,9 @@ export default function TestPage() {
     e.preventDefault();
 
     if (step === 1 && formData.name.trim() !== "") {
-      setStep(2); // move to city step
+      setStep(2); //  city step
     } else if (step === 2 && formData.city.trim() !== "") {
-      setLoading(true); // show loading state
+      setLoading(true); 
 
       const payload = {
         name: formData.name,
@@ -40,15 +40,15 @@ export default function TestPage() {
         );
 
         const data = await response.json();
-        console.log("✅ API Response:", data);
+        console.log("API Response:", data);
 
-        // simulate loading → navigate after delay
+        
         setTimeout(() => {
           setLoading(false);
           navigate("/thankyou");
         }, 2000);
       } catch (error) {
-        console.error("❌ Error posting data:", error);
+        console.error("Error posting data:", error);
         setLoading(false);
       }
     }
@@ -56,7 +56,7 @@ export default function TestPage() {
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center bg-white text-center relative">
-      {/* Top Left Instruction */}
+      {/* Top Left */}
       <div className="absolute top-16 left-9 text-left">
         <p className="font-semibold text-xs">TO START ANALYSIS</p>
       </div>
