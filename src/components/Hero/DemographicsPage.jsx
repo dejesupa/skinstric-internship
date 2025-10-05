@@ -1,8 +1,8 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useCapture } from "../../context/CaptureContext"; // adjust path if needed
 
 export default function DemographicsPage() {
-  const location = useLocation();
-  const { capturedImage } = location.state || {};
+  const { capturedImage } = useCapture(); // ✅ now comes from context
 
   return (
     <section className="min-h-screen flex flex-col justify-between bg-white text-[#1A1B1C]">
@@ -39,7 +39,6 @@ export default function DemographicsPage() {
             <div className="flex items-center justify-center col-start-2">
               <Link
                 to="/summary"
-                state={{ capturedImage }}
                 className="w-[150px] h-[150px] bg-gray-200 hover:bg-gray-300 transform rotate-45 flex items-center justify-center -m-5 font-semibold uppercase cursor-pointer transition-all duration-300"
               >
                 <span className="-rotate-45">Demographics</span>
@@ -76,7 +75,10 @@ export default function DemographicsPage() {
       <footer className="pt-4 pb-8 bg-white">
         <div className="flex justify-between items-center w-full px-9">
           {/* Back */}
-          <Link to="/capture" className="flex items-center gap-6 text-sm font-semibold text-[#1A1B1C]">
+          <Link
+            to="/capture"
+            className="flex items-center gap-6 text-sm font-semibold text-[#1A1B1C]"
+          >
             <div className="relative flex items-center justify-center w-[40px] h-[40px] border border-black rotate-45 transition-transform duration-300 hover:scale-110">
               <svg
                 viewBox="0 0 24 24"
@@ -92,7 +94,6 @@ export default function DemographicsPage() {
           {/* Get Summary */}
           <Link
             to="/summary"
-            state={{ capturedImage }}
             className="flex items-center gap-6 text-sm font-semibold text-[#1A1B1C]"
           >
             <span>GET SUMMARY</span>
